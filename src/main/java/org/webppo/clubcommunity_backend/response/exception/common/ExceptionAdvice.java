@@ -33,6 +33,7 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(AccessDeniedException.class) // @PreAuthorize으로 부터 발생하는 오류
     public ResponseEntity<ResponseBody<Void>> accessDeniedException(AccessDeniedException e) {
+        log.error("Exception Message: {} ", e.getMessage());
         return ResponseEntity
                 .status(ExceptionType.ACCESS_DENIED_EXCEPTION.getStatus())
                 .body(createFailureResponse(ExceptionType.ACCESS_DENIED_EXCEPTION));
@@ -40,6 +41,7 @@ public class ExceptionAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseBody<Void>> methodArgumentNotValidException(MethodArgumentNotValidException e) {
+        log.error("Exception Message: {} ", e.getMessage());
         String customMessage = e.getBindingResult().getAllErrors().get(0).getDefaultMessage();
         return ResponseEntity
                 .status(ExceptionType.BIND_EXCEPTION.getStatus())

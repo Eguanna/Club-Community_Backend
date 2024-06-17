@@ -36,3 +36,7 @@ management:
       enabled: true
     health:
       enabled: true
+
+loggin:
+  level:
+    root: debug
